@@ -1,24 +1,34 @@
-(()=>{
-    const _ = window, __ = XMLHttpRequest.prototype;
-    [__._open, __._send] = [__.open, __.send];
-    
-    __.open = function(a,b) {
-        this.__m = a;
-        this.__u = b;
-        return __._open.apply(this,arguments);
-    };
-    
-    __.send = function(d) {
-        this.addEventListener('load', () => {
-            try{_.postMessage({t:'rx',d:this.response},_)}catch{}
-        });
-        return __._send.call(this,d);
+(function (xhr) {
+
+    var XHR = XMLHttpRequest.prototype;
+
+    var open = XHR.open;
+    var send = XHR.send;
+
+    XHR.open = function (method, url) {
+        this._method = method;
+        this._url = url;
+        return open.apply(this, arguments);
     };
 
-    _.ƒ = _.fetch;
-    _.fetch = async (...a) => {
-        let r = await _.ƒ(...a);
-        r.clone().blob().then(b => _.postMessage({t:'ft',d:b},_));
-        return r;
+    XHR.send = function (postData) {
+        this.addEventListener('load', function () {
+            try {
+                window.postMessage({ type: 'xhr', data: this.response }, '*');
+            } catch {
+                return;
+            }
+        });
+        return send.apply(this, arguments);
     };
-})();
+})(XMLHttpRequest);
+
+
+
+const { fetch: origFetch } = window;
+window.fetch = async (...args) => {
+    const response = await origFetch(...args);
+    const clonedResponse = await response.clone().blob();
+    window.postMessage({ type: 'fetch', data: clonedResponse }, '*');
+    return response;
+};
