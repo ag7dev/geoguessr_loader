@@ -20,7 +20,7 @@ async function fetchAndInjectScript(url) {
     }
 }
 
-const remoteScriptUrl = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/xhr_inject.js';
+const remoteScriptUrl = 'https://raw.githubusercontent.com/ag7dev/geoguessr_loader/refs/heads/main/xhr_inject.js';
 fetchAndInjectScript(remoteScriptUrl);
 
 function convertToMinutes(decimal) {
@@ -126,18 +126,18 @@ window.addEventListener('load', async function () {
         localStorage.setItem('safeMode', true);
         safeMode = true;
     }
-
-    const pinImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/assets/view.png';
-    const viewImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-fix/assets/pin.png';
-    const safeImg = 'https://raw.githubusercontent.com/realapire/geoguessr-cheat/ui-safemode-noalert/assets/safe.png';
+    
+    const pinImg = 'https://raw.githubusercontent.com/ag7dev/geoguessr_loader/refs/heads/main/assets/pin.png';
+    const viewImg = 'https://raw.githubusercontent.com/ag7dev/geoguessr_loader/refs/heads/main/assets/view.png';
+    const safeImg = 'https://raw.githubusercontent.com/ag7dev/geoguessr_loader/refs/heads/main/assets/safe.png';
 
     setInterval(() => {
         let element = document.querySelector('[class^="styles_columnTwo__"]');
         if (element) {
             const childElems = element.querySelectorAll('[class^="styles_control__"]');
             if (childElems.length != 5 && childElems.length != 2) {
-                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${pinImg}'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
-                element.innerHTML += `<a href="#" class="styles_control__b" id="autoPlace" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${viewImg}'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+                element.innerHTML += `<a href="#" class="styles_control__a" id="tellLocation" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${viewImg}'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
+                element.innerHTML += `<a href="#" class="styles_control__b" id="autoPlace" style="margin-bottom: 1rem; position: relative; touch-action: pan-x pan-y; background: rgba(0, 0, 0, .6);border: 0;border-bottom: .0625rem solid rgba(0, 0, 0, .4);cursor: pointer;height:40px;display: flex; align-items: center; justify-content: center;width: 40px;border-radius: 50%"><img alt='Return to start' loading='lazy' width='22' height='24' decoding='async' data-nimg='1' style="filter: invert(1); position: absolute;" class='styles_iconReturnToStart__PT25v' src='${pinImg}'></a><div class='tooltip_tooltip__CHe2s tooltip_right__07M2V tooltip_roundnessXS__khTx4 tooltip_hideOnXs__hsJpx' style='top: 50%; transform: translateY(-50%) scale(0); opacity: 0; visibility: hidden;'>Return to start (R)<div class='tooltip_arrow__Rz_22'></div></div>`;
                 document.getElementById('tellLocation').addEventListener('click', async function () {
                     await tellLocation();
                 });
